@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AT12B/AT12C/AT12D合同運営サイト</title>
-  <button class="button" onclick="logoutClass()">退出する</button>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -132,6 +131,11 @@
       font-size: 13px;
       padding: 10px 0 24px;
     }
+    header .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -148,9 +152,12 @@
   <div id="siteContent">
     <header>
       <div class="wrap" style="margin:0 auto; padding:0 16px;">
-        <h1>【AT12B～D】合同運営サイト</h1>
-        <p>クラスの情報をひとまとめにしたページです<br>
-        今後の予定や時間割、座席表、面談のリンクなどを掲載</p>
+        <div>
+          <h1>【AT12B～D】合同運営サイト</h1>
+          <p>クラスの情報をひとまとめにしたページです<br>
+          今後の予定や時間割、座席表、面談のリンクなどを掲載</p>
+        </div>
+        <button class="button" onclick="logoutClass()">退出する</button>
       </div>
     </header>
 
