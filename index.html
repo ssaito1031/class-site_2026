@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>クラス運営サイト</title>
+  <title>AT12B/AT12C/AT12D合同運営サイト</title>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -136,20 +136,20 @@
 <body>
   <div id="gate" class="gate">
     <div class="gate-card">
-      <h2>クラス運営サイト</h2>
+      <h2>秘密の合言葉</h2>
       <p class="muted">閲覧するにはキーワードを入力してください。</p>
       <input id="keywordInput" type="password" placeholder="キーワードを入力" />
       <button class="button" onclick="checkKeyword()">入室する</button>
       <p id="errorMessage" class="error"></p>
-      <p class="muted">※ この方式は手軽ですが、本格的な安全対策ではありません。</p>
     </div>
   </div>
 
   <div id="siteContent">
     <header>
       <div class="wrap" style="margin:0 auto; padding:0 16px;">
-        <h1>〇年〇組 クラス運営サイト</h1>
-        <p>予定確認・時間割・座席表・面談予約をひとまとめにしたページです。</p>
+        <h1>AT12B/AT12C/AT12D合同運営サイト</h1>
+        <p>クラスの情報をひとまとめにしたページです。<br>
+        今後の予定や時間割、座席表、面談のリンクなど</p>
       </div>
     </header>
 
@@ -158,9 +158,9 @@
         <h2>お知らせ</h2>
         <p>ここに学校からの連絡やクラスのお知らせを書きます。</p>
         <ul>
-          <li>例：来週火曜日は持久走の準備あり</li>
-          <li>例：提出物の締切は4月12日</li>
-          <li>例：面談予約は下のリンクから</li>
+          <li>4月13～17日：IN週間</li>
+          <li>・・・</li>
+          <li>・・・</li>
         </ul>
       </section>
 
@@ -190,7 +190,8 @@
 
       <section class="card">
         <h2>面談予約</h2>
-        <p>先生との面談予約ページに移動できます。</p>
+        <p>担任との面談予約ページに移動できます。<br>
+        ※googleスケジュールが開きます</p>
         <a class="button" href="https://example.com" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
       </section>
     </main>
@@ -201,7 +202,7 @@
   </div>
 
   <script>
-    const ACCESS_KEYWORD = "class2026";
+    const ACCESS_KEYWORD = "241";
 
     function checkKeyword() {
       const input = document.getElementById("keywordInput").value;
@@ -211,7 +212,7 @@
         document.getElementById("siteContent").style.display = "block";
         sessionStorage.setItem("classSiteUnlocked", "true");
       } else {
-        error.textContent = "キーワードが違います。";
+        error.textContent = "キーワードが違います。<br>分からなければ担任の先生に聞いてください。";
       }
     }
 
