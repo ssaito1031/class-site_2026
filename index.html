@@ -5,27 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AT12B/AT12C/AT12D合同運営サイト</title>
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --sub: #6b7280;
-      --line: #dbe3ee;
-      --accent: #2563eb;
-      --accent-2: #eff6ff;
-      --danger: #b91c1c;
+  :root {
+    --bg: #f4f8ff;          /* 背景（薄い青） */
+    --card: #ffffff;        /* 白 */
+    --text: #0f172a;        /* 濃い文字 */
+    --sub: #475569;         /* 補助文字 */
+    --line: #cbd5f5;        /* 枠線 */
+    --accent: #2563eb;      /* 青（メイン） */
+    --accent-2: #dbeafe;    /* 薄い青 */
+    --danger: #dc2626;      /* 赤（強調） */
+    --highlight: #ea580c;   /* 濃いオレンジ（強調2） */
     }
     * { box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: "Meiryo", sans-serif;
+      font-weight: bold;
     }
     header {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      background: linear-gradient(135deg, #2563eb, #1e40af);
       color: white;
-      padding: 28px 20px;
     }
     header h1 {
       margin: 0 0 8px;
@@ -40,13 +38,10 @@
       margin: 24px auto;
       padding: 0 16px 40px;
     }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    .card ul li {
+      margin-bottom: 8px;
+      padding-left: 8px;
+      border-left: 4px solid var(--accent);
     }
     h2 {
       margin: 0 0 14px;
@@ -65,15 +60,21 @@
       gap: 16px;
     }
     .button {
-      display: inline-block;
-      padding: 12px 16px;
-      border-radius: 10px;
       background: var(--accent);
       color: white;
-      text-decoration: none;
       font-weight: bold;
+      border: none;
     }
-    .button:hover { opacity: 0.9; }
+    .button:hover {
+      background: #1d4ed8;
+    }
+    .button-danger {
+      background: var(--danger);
+    }
+
+    .button-warning {
+      background: var(--highlight);
+    }
     .image-box {
       border: 1px dashed var(--line);
       border-radius: 12px;
@@ -203,8 +204,6 @@
         <p>担任との面談予約ページに移動できます<br>
         予約可能時間 = 面談可能時間になります<br>
         自分の予定と確認の上、必要事項入力して予約をしてください<br>
-        ※1枠30分としていますが、30分以上相談したい場合は2枠続けて取ってください<br>
-        ※面談形式は「オンライン」、もしくは「対面」を入力すること(できれば対面推奨です)  <br>
         </p>
         <a class="button" href="https://example.com" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
       </section>
@@ -295,7 +294,8 @@
         unlockSite(input);
         error.textContent = "";
       } else {
-        error.textContent = "キーワードが違います。クラス記号8桁(半角/大文字)で入力してください。";
+        error.textContent = "キーワードが違います。<br>
+        クラス記号8桁(半角/大文字)で入力してください。";
       }
     }
     function logoutClass() {
