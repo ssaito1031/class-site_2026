@@ -147,9 +147,9 @@
   <div id="siteContent">
     <header>
       <div class="wrap" style="margin:0 auto; padding:0 16px;">
-        <h1>AT12B/AT12C/AT12D合同運営サイト</h1>
-        <p>クラスの情報をひとまとめにしたページです。<br>
-        今後の予定や時間割、座席表、面談のリンクなど</p>
+        <h1>【AT12B～D】合同運営サイト</h1>
+        <p>クラスの情報をひとまとめにしたページです<br>
+        今後の予定や時間割、座席表、面談のリンクなどを掲載</p>
       </div>
     </header>
 
@@ -165,8 +165,10 @@
       </section>
 
       <section class="card">
-        <h2>カレンダー</h2>
-        <p class="muted">Googleカレンダーを埋め込む想定です。公開用URLに差し替えてください。</p>
+        <h2>全体行事カレンダー</h2>
+        <p class="muted">AT学科共通のカレンダー<br>
+        ※クラス毎の予定はFXやお知らせを確認してください
+        ※予定が確定次第、順次更新</p>
         <iframe src="https://calendar.google.com/calendar/embed?src=236c5090baae7746f9d2819816ed292ae6e7d33b696c4a8685e08f562df44938%40group.calendar.google.com&ctz=Asia%2FTokyo"></iframe>
       </section>
 
@@ -190,8 +192,12 @@
 
       <section class="card">
         <h2>面談予約</h2>
-        <p>担任との面談予約ページに移動できます。<br>
-        ※googleスケジュールが開きます</p>
+        <p>担任との面談予約ページに移動できます<br>
+        予約可能時間 = 面談可能時間になります<br>
+        自分の予定と確認の上、必要事項入力して予約をしてください<br>
+        ※1枠30分としていますが、30分以上相談したい場合は2枠続けて取ってください<br>
+        ※面談形式は「オンライン」、もしくは「対面」を入力すること(できれば対面推奨です)  <br>
+        </p>
         <a class="button" href="https://example.com" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
       </section>
     </main>
@@ -202,24 +208,89 @@
   </div>
 
   <script>
-    const ACCESS_KEYWORD = "241";
+    const CLASS_CONFIG = {
+      "AT12B241": {
+        title: "AT12B241へようこそ",
+        subtitle: "Bクラスの予定・時間割・座席表・面談予約を確認できます。",
+        notices: [
+          "Bクラスのお知らせをここに書きます",
+          "例：来週火曜日は理科室集合",
+          "例：提出物の締切は4月12日"
+        ],
+        timetableImage: "timetable-b.jpg",
+        seatsImage: "seats-b.jpg",
+      },
+      "AT12C241": {
+        title: "AT12C241へようこそ",
+        subtitle: "Cクラスの予定・時間割・座席表・面談予約を確認できます。",
+        notices: [
+          "Cクラスのお知らせをここに書きます",
+          "例：来週火曜日は理科室集合",
+          "例：提出物の締切は4月12日"
+        ],
+        timetableImage: "timetable-c.jpg",
+        seatsImage: "seats-c.jpg",
+      },
+      "AT12D241": {
+        title: "AT12D241へようこそ",
+        subtitle: "Dクラスの予定・時間割・座席表・面談予約を確認できます。",
+        notices: [
+          "Dクラスのお知らせをここに書きます",
+          "例：来週火曜日は理科室集合",
+          "例：提出物の締切は4月12日"
+        ],
+        timetableImage: "timetable-d.jpg",
+        seatsImage: "seats-d.jpg",
+      },
+    };
+
+    function applyClassContent(classData) {
+      document.querySelector("header h1").textContent = classData.title;
+      document.querySelector("header p").textContent = classData.subtitle;
+
+      const noticeList = document.querySelector("section.card ul");
+      noticeList.innerHTML = "";
+      classData.notices.forEach((notice) => {
+        const li = document.createElement("li");
+        li.textContent = notice;
+        noticeList.appendChild(li);
+      });
+
+      document.querySelector("iframe").src = classData.calendarUrl;
+
+      const images = document.querySelectorAll(".image-box img");
+      images[0].src = classData.timetableImage;
+      images[0].alt = `${classData.title}の時間割`;
+      images[1].src = classData.seatsImage;
+      images[1].alt = `${classData.title}の座席表`;
+
+      const interviewButton = document.querySelector(".card a.button");
+      interviewButton.href = classData.interviewUrl;
+    }
+
+    function unlockSite(classKey) {
+      const classData = CLASS_CONFIG[classKey];
+      applyClassContent(classData);
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("siteContent").style.display = "block";
+      sessionStorage.setItem("selectedClass", classKey);
+    }
 
     function checkKeyword() {
-      const input = document.getElementById("keywordInput").value;
+      const input = document.getElementById("keywordInput").value.trim();
       const error = document.getElementById("errorMessage");
-      if (input === ACCESS_KEYWORD) {
-        document.getElementById("gate").style.display = "none";
-        document.getElementById("siteContent").style.display = "block";
-        sessionStorage.setItem("classSiteUnlocked", "true");
+      if (CLASS_CONFIG[input]) {
+        unlockSite(input);
+        error.textContent = "";
       } else {
-        error.textContent = "キーワードが違います。<br>分からなければ担任の先生に聞いてください。";
+        error.textContent = "キーワードが違います。クラス記号8桁(半角/大文字)で入力してください。";
       }
     }
 
     window.addEventListener("load", () => {
-      if (sessionStorage.getItem("classSiteUnlocked") === "true") {
-        document.getElementById("gate").style.display = "none";
-        document.getElementById("siteContent").style.display = "block";
+      const savedClass = sessionStorage.getItem("selectedClass");
+      if (savedClass && CLASS_CONFIG[savedClass]) {
+        unlockSite(savedClass);
       }
     });
   </script>
