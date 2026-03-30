@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AT12B/AT12C/AT12D合同運営サイト</title>
+  <button class="button" onclick="logoutClass()">退出する</button>
   <style>
     :root {
       --bg: #f5f7fb;
@@ -290,7 +291,13 @@
         error.textContent = "キーワードが違います。クラス記号8桁(半角/大文字)で入力してください。";
       }
     }
-
+    function logoutClass() {
+      sessionStorage.removeItem("selectedClass");
+      document.getElementById("siteContent").style.display = "none";
+      document.getElementById("gate").style.display = "flex";
+      document.getElementById("keywordInput").value = "";
+      document.getElementById("errorMessage").textContent = "";
+    }
     window.addEventListener("load", () => {
       const savedClass = sessionStorage.getItem("selectedClass");
       if (savedClass && CLASS_CONFIG[savedClass]) {
