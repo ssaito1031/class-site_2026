@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>クラス運営サイト</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --sub: #6b7280;
+      --line: #dbe3ee;
+      --accent: #2563eb;
+      --accent-2: #eff6ff;
+      --danger: #b91c1c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 28px 20px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+    header p {
+      margin: 0;
+      opacity: 0.95;
+    }
+    .wrap {
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+    p, li {
+      line-height: 1.7;
+    }
+    .muted {
+      color: var(--sub);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .button:hover { opacity: 0.9; }
+    .image-box {
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fafcff;
+    }
+    .image-box img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+    iframe {
+      width: 100%;
+      min-height: 500px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+    }
+    #siteContent { display: none; }
+    .gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .gate-card {
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .gate-card h2 {
+      margin-bottom: 10px;
+    }
+    .gate-card input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-size: 16px;
+    }
+    .error {
+      color: var(--danger);
+      font-size: 14px;
+      min-height: 20px;
+    }
+    footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 10px 0 24px;
+    }
+  </style>
+</head>
+<body>
+  <div id="gate" class="gate">
+    <div class="gate-card">
+      <h2>クラス運営サイト</h2>
+      <p class="muted">閲覧するにはキーワードを入力してください。</p>
+      <input id="keywordInput" type="password" placeholder="キーワードを入力" />
+      <button class="button" onclick="checkKeyword()">入室する</button>
+      <p id="errorMessage" class="error"></p>
+      <p class="muted">※ この方式は手軽ですが、本格的な安全対策ではありません。</p>
+    </div>
+  </div>
+
+  <div id="siteContent">
+    <header>
+      <div class="wrap" style="margin:0 auto; padding:0 16px;">
+        <h1>〇年〇組 クラス運営サイト</h1>
+        <p>予定確認・時間割・座席表・面談予約をひとまとめにしたページです。</p>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="card">
+        <h2>お知らせ</h2>
+        <p>ここに学校からの連絡やクラスのお知らせを書きます。</p>
+        <ul>
+          <li>例：来週火曜日は持久走の準備あり</li>
+          <li>例：提出物の締切は4月12日</li>
+          <li>例：面談予約は下のリンクから</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>カレンダー</h2>
+        <p class="muted">Googleカレンダーを埋め込む想定です。公開用URLに差し替えてください。</p>
+        <iframe src="https://calendar.google.com/calendar/embed?src=ja.japanese%23holiday%40group.v.calendar.google.com&ctz=Asia%2FTokyo"></iframe>
+      </section>
+
+      <section class="grid">
+        <section class="card">
+          <h2>時間割</h2>
+          <div class="image-box">
+            <img src="https://placehold.co/900x1200?text=%E6%99%82%E9%96%93%E5%89%B2%E7%94%BB%E5%83%8F%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B" alt="時間割" />
+          </div>
+          <p class="muted">画像ファイル名を timetable.jpg などに変えて差し替えてください。</p>
+        </section>
+
+        <section class="card">
+          <h2>座席表</h2>
+          <div class="image-box">
+            <img src="https://placehold.co/900x1200?text=%E5%BA%A7%E5%B8%AD%E8%A1%A8%E7%94%BB%E5%83%8F%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B" alt="座席表" />
+          </div>
+          <p class="muted">画像ファイル名を seats.jpg などに変えて差し替えてください。</p>
+        </section>
+      </section>
+
+      <section class="card">
+        <h2>面談予約</h2>
+        <p>先生との面談予約ページに移動できます。</p>
+        <a class="button" href="https://example.com" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
+      </section>
+    </main>
+
+    <footer>
+      クラス運営サイト
+    </footer>
+  </div>
+
+  <script>
+    const ACCESS_KEYWORD = "class2026";
+
+    function checkKeyword() {
+      const input = document.getElementById("keywordInput").value;
+      const error = document.getElementById("errorMessage");
+      if (input === ACCESS_KEYWORD) {
+        document.getElementById("gate").style.display = "none";
+        document.getElementById("siteContent").style.display = "block";
+        sessionStorage.setItem("classSiteUnlocked", "true");
+      } else {
+        error.textContent = "キーワードが違います。";
+      }
+    }
+
+    window.addEventListener("load", () => {
+      if (sessionStorage.getItem("classSiteUnlocked") === "true") {
+        document.getElementById("gate").style.display = "none";
+        document.getElementById("siteContent").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
