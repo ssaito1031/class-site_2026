@@ -144,6 +144,34 @@
       justify-content: space-between;
       align-items: center;
     }
+    .slider {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.8;
+    }
+    .slide-btn:hover {
+      opacity: 1;
+    }
+    .slide-btn.left {
+      left: 10px;
+    }
+    .slide-btn.right {
+      right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -199,8 +227,10 @@
 
         <section class="card">
           <h2>座席表</h2>
-          <div class="image-box">
-            <img src="https://placehold.co/900x1200?text=%E5%BA%A7%E5%B8%AD%E8%A1%A8%E7%94%BB%E5%83%8F%E3%82%92%E5%85%A5%E3%82%8C%E3%82%8B" alt="座席表" />
+          <div class="image-box slider">
+            <button class="slide-btn left" onclick="prevSlide()">◀</button>
+            <img id="seatsImg" src="https://placehold.co/900x1200" alt="座席表">
+            <button class="slide-btn right" onclick="nextSlide()">▶</button>
           </div>
           <p class="muted">画像ファイル名を seats.jpg などに変えて差し替えてください。</p>
         </section>
@@ -233,7 +263,10 @@
           ""
         ],
         timetableImage: "timetable-at12b.png",
-        seatsImage: "seats-b.jpg",
+        seatsImage: "seats-at12b-141.png",
+                    "seats-at12b-284.png",
+                    "seats-at12b-285.png",
+                    "seats-at12b-343.png",
         calendarUrl: COMMON_CALENDAR_URL,
       },
       "AT12C241": {
@@ -245,7 +278,10 @@
           ""
         ],
         timetableImage: "timetable-at12c.png",
-        seatsImage: "seats-c.jpg",
+        seatsImage: "seats-at12c-141.png",
+                    "seats-at12c-332.png",
+                    "seats-at12c-335.png",
+                    "seats-at12c-343.png",
         calendarUrl: COMMON_CALENDAR_URL,
       },
       "AT12D241": {
@@ -257,7 +293,10 @@
           ""
         ],
         timetableImage: "timetable-at12d.png",
-        seatsImage: "seats-d.jpg",
+        seatsImage: "seats-at12d-141.png",
+                    "seats-at12d-201.png",
+                    "seats-at12d-332.png",
+                    "seats-at12d-343.png",
         calendarUrl: COMMON_CALENDAR_URL,
       },
     };
@@ -279,9 +318,10 @@
       const images = document.querySelectorAll(".image-box img");
       images[0].src = classData.timetableImage;
       images[0].alt = `${classData.title}の時間割`;
-      images[1].src = classData.seatsImage;
+      seatImages = classData.seatImages;
+      currentSlide = 0;
+      updateSlide();
       images[1].alt = `${classData.title}の座席表`;
-
       const interviewButton = document.querySelector(".card a.button");
       interviewButton.href = classData.interviewUrl;
     }
@@ -315,6 +355,23 @@
       const savedClass = sessionStorage.getItem("selectedClass");
       if (savedClass && CLASS_CONFIG[savedClass]) {
         unlockSite(savedClass);
+      }
+      let currentSlide = 0;
+      let seatImages = [];
+
+      function updateSlide() {
+        const img = document.getElementById("seatsImg");
+        if (seatImages.length > 0) {
+          img.src = seatImages[currentSlide];
+        }
+      }
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % seatImages.length;
+        updateSlide();
+      }
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + seatImages.length) % seatImages.length;
+        updateSlide();
       }
     });
   </script>
