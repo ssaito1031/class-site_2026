@@ -299,8 +299,7 @@
         unlockSite(input);
         error.textContent = "";
       } else {
-        error.textContent = "キーワードが違います。<br>
-        クラス記号8桁(半角/大文字)で入力してください。";
+        error.innerHTML = "キーワードが違います。<br>クラス記号8桁(半角/大文字)で入力してください。";
       }
     }
     function logoutClass() {
