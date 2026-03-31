@@ -232,7 +232,7 @@
             <img id="seatsImg" src="https://placehold.co/900x1200" alt="座席表">
             <button class="slide-btn right" onclick="nextSlide()">▶</button>
           </div>
-          <p class="muted">画像ファイル名を seats.jpg などに変えて差し替えてください。</p>
+          <p class="muted">座席表は出席番号で管理しています<br>名前付き座席表はTeamsにあります</p>
         </section>
       </section>
 
@@ -242,7 +242,7 @@
         予約可能時間 = 面談可能時間になります<br>
         自分の予定と確認の上、必要事項入力して予約をしてください<br>
         </p>
-        <a class="button" href="https://example.com" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
+        <a class="button" href="https://calendar.app.google/Je4TF7YrVaKHNTW98" target="_blank" rel="noopener noreferrer">面談予約はこちら</a>
       </section>
     </main>
 
@@ -300,7 +300,22 @@
         calendarUrl: COMMON_CALENDAR_URL,
       },
     };
-
+    let currentSlide = 0;
+    let seatImages = [];
+    function updateSlide() {
+      const img = document.getElementById("seatsImg");
+      if (seatImages.length > 0) {
+        img.src = seatImages[currentSlide];
+      }
+    }
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % seatImages.length;
+      updateSlide();
+    }
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + seatImages.length) % seatImages.length;
+      updateSlide();
+    }
     function applyClassContent(classData) {
       document.querySelector("header h1").textContent = classData.title;
       document.querySelector("header p").textContent = classData.subtitle;
@@ -355,23 +370,6 @@
       const savedClass = sessionStorage.getItem("selectedClass");
       if (savedClass && CLASS_CONFIG[savedClass]) {
         unlockSite(savedClass);
-      }
-      let currentSlide = 0;
-      let seatImages = [];
-
-      function updateSlide() {
-        const img = document.getElementById("seatsImg");
-        if (seatImages.length > 0) {
-          img.src = seatImages[currentSlide];
-        }
-      }
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % seatImages.length;
-        updateSlide();
-      }
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + seatImages.length) % seatImages.length;
-        updateSlide();
       }
     });
   </script>
