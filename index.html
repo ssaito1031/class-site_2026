@@ -263,7 +263,7 @@
           ""
         ],
         timetableImage: "timetable-at12b.png",
-        seatsImages: ["seats-at12b-141.png",
+        seatImages: ["seats-at12b-141.png",
                     "seats-at12b-284.png",
                     "seats-at12b-285.png",
                     "seats-at12b-343.png"
@@ -279,7 +279,7 @@
           ""
         ],
         timetableImage: "timetable-at12c.png",
-        seatsImages: ["seats-at12c-141.png",
+        seatImages: ["seats-at12c-141.png",
                     "seats-at12c-332.png",
                     "seats-at12c-335.png",
                     "seats-at12c-343.png"
@@ -295,7 +295,7 @@
           ""
         ],
         timetableImage: "timetable-at12d.png",
-        seatsImages: ["seats-at12d-141.png",
+        seatImages: ["seats-at12d-141.png",
                     "seats-at12d-201.png",
                     "seats-at12d-332.png",
                     "seats-at12d-343.png"
@@ -307,15 +307,18 @@
     let seatImages = [];
     function updateSlide() {
       const img = document.getElementById("seatsImg");
-      if (seatImages.length > 0) {
+      if (img && seatImages && seatImages.length > 0) {
         img.src = seatImages[currentSlide];
       }
     }
     function nextSlide() {
+      if (!seatImages || seatImages.length === 0) return;
       currentSlide = (currentSlide + 1) % seatImages.length;
       updateSlide();
     }
+
     function prevSlide() {
+      if (!seatImages || seatImages.length === 0) return;
       currentSlide = (currentSlide - 1 + seatImages.length) % seatImages.length;
       updateSlide();
     }
